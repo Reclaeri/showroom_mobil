@@ -1,73 +1,71 @@
-🏍️ DATABASE SHOWROOM MOTOR
+# 🏍️ Database Showroom Motor
 
-Project MySQL/MariaDB Menggunakan XAMPP (Windows)
+Project database sederhana menggunakan **MySQL / MariaDB** melalui **XAMPP (Windows)**.  
+Database ini mengelola data barang (motor), pembeli, dan transaksi.
 
-📌 Deskripsi
+---
 
-Project ini merupakan implementasi database sederhana untuk sistem Showroom Motor menggunakan MySQL/MariaDB melalui XAMPP.
+# 🚀 SETUP DATABASE
 
-Database ini mengelola:
-
-📦 Data barang (motor)
-
-👤 Data pembeli
-
-🧾 Data transaksi
-
-🔗 Relasi antar tabel (JOIN)
-
-👁️ VIEW untuk detail transaksi
-
-📊 Aggregate Function
-
-🚀 SETUP DATABASE
-1️⃣ Masuk ke MySQL
+## 1️⃣ Masuk ke MySQL
+```bash
 mysql -u root
+```
+**Penjelasan:**  
+Digunakan untuk login ke server MySQL sebagai user `root`.
 
-Penjelasan:
-Digunakan untuk masuk ke server MySQL/MariaDB sebagai user root.
+---
 
-2️⃣ Membuat Database
+## 2️⃣ Membuat Database
+```sql
 CREATE DATABASE showroom_motor;
 USE showroom_motor;
+```
 
-Penjelasan:
+**Penjelasan:**
+- `CREATE DATABASE` → Membuat database baru bernama `showroom_motor`
+- `USE` → Mengaktifkan database agar bisa digunakan
 
-CREATE DATABASE → Membuat database baru bernama showroom_motor
+---
 
-USE → Mengaktifkan database agar bisa digunakan
+# 🗄️ STRUKTUR TABEL
 
-🗄️ STRUKTUR TABEL
-📦 Tabel barang
+## 📦 Tabel `barang`
+```sql
 CREATE TABLE barang (
     id_barang INT AUTO_INCREMENT PRIMARY KEY,
     nama_barang VARCHAR(100),
     harga DECIMAL(15,2),
     stok INT
 );
+```
 
-Penjelasan:
+**Penjelasan:**
+- `id_barang` → ID unik (primary key)
+- `AUTO_INCREMENT` → Bertambah otomatis
+- `nama_barang` → Nama motor
+- `harga` → Harga motor
+- `stok` → Jumlah stok
 
-id_barang → Primary key (unik, otomatis bertambah)
+---
 
-nama_barang → Nama motor
-
-harga → Harga motor
-
-stok → Jumlah stok tersedia
-
-👤 Tabel pembeli
+## 👤 Tabel `pembeli`
+```sql
 CREATE TABLE pembeli (
     id_pembeli INT AUTO_INCREMENT PRIMARY KEY,
     nama_pembeli VARCHAR(100),
     alamat TEXT,
     no_hp VARCHAR(15)
 );
+```
 
-Penjelasan:
+**Penjelasan:**
 Menyimpan data pelanggan yang membeli motor.
 
-🧾 Tabel transaksi
+---
+
+## 🧾 Tabel `transaksi`
+```sql
 CREATE TABLE transaksi (
     id_transaksi INT AUTO_INCREMENT PRIMARY KEY,
     nama_barang VARCHAR(100),
@@ -75,19 +73,28 @@ CREATE TABLE transaksi (
     jumlah_beli INT,
     total_bayar DECIMAL(15,2)
 );
+```
 
-Penjelasan:
+**Penjelasan:**
 Menyimpan data pembelian motor.
 
-🔄 ALTER TABLE
+---
+
+## 🔄 ALTER TABLE
+```sql
 ALTER TABLE transaksi
 ADD nama_pembeli VARCHAR(100) AFTER id_transaksi;
+```
 
-Penjelasan:
-Menambahkan kolom nama_pembeli setelah id_transaksi.
+**Penjelasan:**
+Menambahkan kolom `nama_pembeli` ke dalam tabel transaksi.
 
-📥 INSERT DATA
-Insert Data Barang
+---
+
+# 📥 INSERT DATA
+
+## Insert Barang
+```sql
 INSERT INTO barang (nama_barang, harga, stok) VALUES
 ('Honda Beat',19000000,15),
 ('Honda Vario 160',29000000,10),
@@ -96,11 +103,15 @@ INSERT INTO barang (nama_barang, harga, stok) VALUES
 ('Honda ADV 160',37000000,5),
 ('Honda Supra X 125',16000000,15),
 ('Honda Verza',24000000,5);
+```
 
-Penjelasan:
+**Penjelasan:**  
 Menambahkan 7 data motor ke tabel barang.
 
-Insert Data Pembeli
+---
+
+## Insert Pembeli
+```sql
 INSERT INTO pembeli (nama_pembeli, alamat, no_hp) VALUES
 ('Dimas','Bojong','0388173891'),
 ('Syahrul','Bogor','0388173892'),
@@ -109,11 +120,15 @@ INSERT INTO pembeli (nama_pembeli, alamat, no_hp) VALUES
 ('Gibran','Sukahati','0388173895'),
 ('Zaki','Sukahati','0388173896'),
 ('Revan','Citayam','0388173897');
+```
 
-Penjelasan:
+**Penjelasan:**  
 Menambahkan 7 data pembeli.
 
-Insert Data Transaksi
+---
+
+## Insert Transaksi
+```sql
 INSERT INTO transaksi (nama_barang, tanggal_transaksi, jumlah_beli, total_bayar) VALUES
 ('Honda Beat','2026-02-01',1,19000000),
 ('Honda Vario 160','2026-02-02',1,29000000),
@@ -125,65 +140,95 @@ INSERT INTO transaksi (nama_barang, tanggal_transaksi, jumlah_beli, total_bayar)
 ('Honda Beat','2026-02-08',2,38000000),
 ('Honda Scoopy','2026-02-09',1,23000000),
 ('Honda PCX 160','2026-02-10',2,66000000);
+```
 
-Penjelasan:
-Menambahkan 10 data transaksi pembelian motor.
+**Penjelasan:**  
+Menambahkan 10 transaksi pembelian motor.
 
-📊 QUERY & PENJELASAN
-🔹 SELECT Semua Data
+---
+
+# 📊 QUERY & PENJELASAN
+
+---
+
+## 🔹 SELECT Semua Data
+```sql
 SELECT * FROM barang;
 SELECT * FROM pembeli;
 SELECT * FROM transaksi;
+```
 
-Penjelasan:
-Menampilkan seluruh data dari masing-masing tabel.
+**Penjelasan:**  
+Menampilkan seluruh isi tabel.
 
-🔹 UPDATE Data
+---
+
+## 🔹 UPDATE Data
+```sql
 UPDATE pembeli
 SET nama_pembeli = 'Bama'
 WHERE id_pembeli = 4;
+```
 
-Penjelasan:
-Mengubah nama pembeli dengan ID 4 menjadi "Bama".
+**Penjelasan:**  
+Mengubah nama pembeli dengan ID 4 menjadi Bama.
 
-🔹 Aggregate Function
+---
+
+## 🔹 Aggregate Function
+
+### Rata-rata Harga
+```sql
 SELECT AVG(harga) FROM barang;
-
+```
 Menampilkan rata-rata harga motor.
 
+### Harga Minimum
+```sql
 SELECT MIN(harga) FROM barang;
+```
+Menampilkan harga termurah.
 
-Menampilkan harga motor paling murah.
-
+### Harga Maksimum
+```sql
 SELECT MAX(harga) FROM barang;
+```
+Menampilkan harga termahal.
 
-Menampilkan harga motor paling mahal.
+---
 
-🔹 Subquery
+## 🔹 Subquery
+```sql
 SELECT nama_barang, harga
 FROM barang
 WHERE harga = (SELECT MIN(harga) FROM barang);
+```
 
-Penjelasan:
-Menampilkan motor dengan harga termurah menggunakan subquery.
+**Penjelasan:**  
+Menampilkan motor dengan harga paling murah menggunakan subquery.
 
-🔹 WHERE + OR + LIMIT
+---
+
+## 🔹 WHERE + OR + LIMIT
+```sql
 SELECT *
 FROM transaksi
 WHERE nama_barang = 'Honda Beat'
 OR jumlah_beli = 1
 LIMIT 5;
+```
 
-Penjelasan:
+**Penjelasan:**
+- Menampilkan transaksi Honda Beat
+- ATAU jumlah beli = 1
+- `LIMIT 5` membatasi 5 baris pertama
 
-Menampilkan transaksi dengan motor Honda Beat
+---
 
-ATAU jumlah beli = 1
+# 🔗 JOIN
 
-LIMIT 5 → Membatasi hasil hanya 5 baris
-
-🔗 JOIN
-🔹 INNER JOIN
+## 🔹 INNER JOIN
+```sql
 SELECT
     t.id_transaksi,
     t.nama_pembeli,
@@ -197,19 +242,16 @@ INNER JOIN pembeli p
     ON t.nama_pembeli = p.nama_pembeli
 INNER JOIN barang b
     ON t.nama_barang = b.nama_barang;
+```
 
-Penjelasan:
-Menggabungkan 3 tabel:
-
-transaksi
-
-pembeli
-
-barang
-
+**Penjelasan:**  
+Menggabungkan tabel transaksi, pembeli, dan barang.  
 Hanya data yang cocok di semua tabel yang ditampilkan.
 
-🔹 LEFT JOIN
+---
+
+## 🔹 LEFT JOIN
+```sql
 SELECT
     b.nama_barang,
     b.harga,
@@ -217,11 +259,15 @@ SELECT
 FROM barang b
 LEFT JOIN transaksi t
     ON b.nama_barang = t.nama_barang;
+```
 
-Penjelasan:
-Menampilkan semua data barang, walaupun tidak ada transaksi.
+**Penjelasan:**  
+Menampilkan semua barang walaupun belum ada transaksi.
 
-🔹 UNION
+---
+
+## 🔹 UNION
+```sql
 SELECT b.nama_barang, t.tanggal_transaksi
 FROM barang b
 LEFT JOIN transaksi t ON b.nama_barang = t.nama_barang
@@ -231,11 +277,17 @@ UNION
 SELECT b.nama_barang, t.tanggal_transaksi
 FROM barang b
 RIGHT JOIN transaksi t ON b.nama_barang = t.nama_barang;
+```
 
-Penjelasan:
+**Penjelasan:**  
 Menggabungkan hasil LEFT JOIN dan RIGHT JOIN menjadi satu hasil.
 
-👁️ VIEW
+---
+
+# 👁️ VIEW
+
+## Membuat View
+```sql
 CREATE VIEW view_detail_transaksi AS
 SELECT
     t.id_transaksi,
@@ -250,41 +302,41 @@ SELECT
 FROM transaksi t
 JOIN pembeli p ON t.nama_pembeli = p.nama_pembeli
 JOIN barang b ON t.nama_barang = b.nama_barang;
+```
 
-Penjelasan:
-Membuat VIEW agar bisa melihat detail transaksi tanpa menulis JOIN berulang-ulang.
+**Penjelasan:**  
+Membuat view untuk menampilkan detail transaksi tanpa perlu menulis JOIN berulang.
 
-Untuk melihatnya:
+---
 
+## Menampilkan View
+```sql
 SELECT * FROM view_detail_transaksi;
-🎯 Materi yang Dipelajari
+```
 
-CREATE DATABASE
+**Penjelasan:**  
+Menampilkan isi dari view yang sudah dibuat.
 
-CREATE TABLE
+---
 
-INSERT
+# 🎯 Materi yang Dipelajari
 
-UPDATE
+- CREATE DATABASE
+- CREATE TABLE
+- INSERT
+- UPDATE
+- SELECT
+- WHERE
+- LIMIT
+- Aggregate Function
+- Subquery
+- JOIN
+- UNION
+- ALTER TABLE
+- VIEW
 
-SELECT
+---
 
-WHERE
+# 📌 Kesimpulan
 
-LIMIT
-
-Aggregate Function
-
-Subquery
-
-JOIN
-
-UNION
-
-ALTER TABLE
-
-VIEW
-
-📌 Kesimpulan
-
-Project ini menunjukkan bagaimana membangun sistem database sederhana untuk showroom motor menggunakan MySQL/MariaDB, serta memahami relasi antar tabel dan pengolahan data transaksi.
+Project ini menunjukkan cara membuat database showroom motor lengkap dengan relasi antar tabel dan pengolahan data transaksi menggunakan MySQL/MariaDB.
