@@ -1,0 +1,453 @@
+Setting environment for using XAMPP for Windows.
+Revan Oknanda@DESKTOP-ODTGVVT c:\xampp
+# mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database showroom_motor;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> use showroom_motor;
+Database changed
+MariaDB [showroom_motor]> create table barang{
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{' at line 1
+MariaDB [showroom_motor]> CREATE TABLE barang (
+    ->     id_barang INT AUTO_INCREMENT PRIMARY KEY,
+    ->     nama_barang VARCHAR(100),
+    ->     harga DECIMAL(15,2),
+    ->     stok INT
+    -> );
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [showroom_motor]> CREATE TABLE pembeli (
+    ->     id_pembeli INT AUTO_INCREMENT PRIMARY KEY,
+    ->     nama_pembeli VARCHAR(100),
+    ->     alamat TEXT,
+    ->     no_hp VARCHAR(15)
+    -> );
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [showroom_motor]> CREATE TABLE transaksi (
+    ->     id_transaksi INT AUTO_INCREMENT PRIMARY KEY,
+    ->     nama_barang VARCHAR(100),
+    ->     tanggal_transaksi DATE,
+    ->     jumlah_beli INT,
+    ->     total_bayar DECIMAL(15,2)
+    -> );
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [showroom_motor]> INSERT INTO barang (nama_barang, harga, stok) VALUES
+    -> ('Honda Beat','19000000','15'),
+    -> ('Honda Vario 160','29000000','10'),
+    -> ('Honda Scoopy','23000000','15'),
+    -> ('Honda PCX 160','33000000','10'),
+    -> ('Honda ADV 160','37000000','5'),
+    -> ('Honda Supra X 125','16000000','15'),
+    -> ('Honda Verza','24000000','5');
+Query OK, 7 rows affected (0.009 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+MariaDB [showroom_motor]> INSERT INTO pembeli (nama_pembeli, alamat, no_hp) VALUES
+    -> ('Dimas', 'Bojong', '0388173891'),
+    -> ('Syahrul', 'Bogor', '0388173892'),
+    -> ('Adli', 'Citayam', '0388173893'),
+    -> ('Azzam', 'Citayam', '0388173894'),
+    -> ('Gibran', 'Sukahati', '0388173895'),
+    -> ('Zaki', 'Sukahati', '0388173896'),
+    -> ('Revan', 'Citayam', '0388173897');
+Query OK, 7 rows affected (0.009 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+MariaDB [showroom_motor]> INSERT INTO transaksi (nama_barang, tanggal_transaksi, jumlah_beli, total_bayar) VALUES
+    -> INSERT INTO transaksi (nama_barang, tanggal_transaksi, jumlah_beli, total_bayar) VALUES
+    -> ('Honda Beat', '2026-02-01', 1, 19000000),
+    -> ('Honda Vario 160', '2026-02-02', 1, 29000000),
+    -> ('Honda Scoopy', '2026-02-03', 2, 46000000),
+    -> ('Honda PCX 160', '2026-02-04', 1, 33000000),
+    -> ('Honda ADV 160', '2026-02-05', 1, 37000000),
+    -> ('Honda Supra X 125', '2026-02-06', 3, 48000000),
+    -> ('Honda Verza', '2026-02-07', 1, 24000000),
+    -> ('Honda Beat', '2026-02-08', 2, 38000000),
+    -> ('Honda Scoopy', '2026-02-09', 1, 23000000),
+    -> ('Honda PCX 160', '2026-02-10', 2, 66000000);;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INSERT INTO transaksi (nama_barang, tanggal_transaksi, jumlah_beli, total_bay...' at line 2
+ERROR: No query specified
+
+MariaDB [showroom_motor]> INSERT INTO transaksi (nama_barang, tanggal_transaksi, jumlah_beli, total_bayar) VALUES
+    -> ('Honda Beat', '2026-02-01', 1, 19000000),
+    -> ('Honda Vario 160', '2026-02-02', 1, 29000000),
+    -> ('Honda Scoopy', '2026-02-03', 2, 46000000),
+    -> ('Honda PCX 160', '2026-02-04', 1, 33000000),
+    -> ('Honda ADV 160', '2026-02-05', 1, 37000000),
+    -> ('Honda Supra X 125', '2026-02-06', 3, 48000000),
+    -> ('Honda Verza', '2026-02-07', 1, 24000000),
+    -> ('Honda Beat', '2026-02-08', 2, 38000000),
+    -> ('Honda Scoopy', '2026-02-09', 1, 23000000),
+    -> ('Honda PCX 160', '2026-02-10', 2, 66000000);
+Query OK, 10 rows affected (0.009 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+MariaDB [showroom_motor]> select * from transaksi;
++--------------+-------------------+-------------------+-------------+-------------+
+| id_transaksi | nama_barang       | tanggal_transaksi | jumlah_beli | total_bayar |
++--------------+-------------------+-------------------+-------------+-------------+
+|            1 | Honda Beat        | 2026-02-01        |           1 | 19000000.00 |
+|            2 | Honda Vario 160   | 2026-02-02        |           1 | 29000000.00 |
+|            3 | Honda Scoopy      | 2026-02-03        |           2 | 46000000.00 |
+|            4 | Honda PCX 160     | 2026-02-04        |           1 | 33000000.00 |
+|            5 | Honda ADV 160     | 2026-02-05        |           1 | 37000000.00 |
+|            6 | Honda Supra X 125 | 2026-02-06        |           3 | 48000000.00 |
+|            7 | Honda Verza       | 2026-02-07        |           1 | 24000000.00 |
+|            8 | Honda Beat        | 2026-02-08        |           2 | 38000000.00 |
+|            9 | Honda Scoopy      | 2026-02-09        |           1 | 23000000.00 |
+|           10 | Honda PCX 160     | 2026-02-10        |           2 | 66000000.00 |
++--------------+-------------------+-------------------+-------------+-------------+
+10 rows in set (0.001 sec)
+
+MariaDB [showroom_motor]> select * from pembeli;
++------------+--------------+----------+------------+
+| id_pembeli | nama_pembeli | alamat   | no_hp      |
++------------+--------------+----------+------------+
+|          1 | Dimas        | Bojong   | 0388173891 |
+|          2 | Syahrul      | Bogor    | 0388173892 |
+|          3 | Adli         | Citayam  | 0388173893 |
+|          4 | Azzam        | Citayam  | 0388173894 |
+|          5 | Gibran       | Sukahati | 0388173895 |
+|          6 | Zaki         | Sukahati | 0388173896 |
+|          7 | Revan        | Citayam  | 0388173897 |
++------------+--------------+----------+------------+
+7 rows in set (0.000 sec)
+
+MariaDB [showroom_motor]> select * from barang;
++-----------+-------------------+-------------+------+
+| id_barang | nama_barang       | harga       | stok |
++-----------+-------------------+-------------+------+
+|         1 | Honda Beat        | 19000000.00 |   15 |
+|         2 | Honda Vario 160   | 29000000.00 |   10 |
+|         3 | Honda Scoopy      | 23000000.00 |   15 |
+|         4 | Honda PCX 160     | 33000000.00 |   10 |
+|         5 | Honda ADV 160     | 37000000.00 |    5 |
+|         6 | Honda Supra X 125 | 16000000.00 |   15 |
+|         7 | Honda Verza       | 24000000.00 |    5 |
++-----------+-------------------+-------------+------+
+7 rows in set (0.001 sec)
+
+MariaDB [showroom_motor]> update pembeli set nama_pembeli = Bama where id_pembeli = 4;
+ERROR 1054 (42S22): Unknown column 'Bama' in 'field list'
+MariaDB [showroom_motor]> update pembeli set nama_pembeli = 'Bama' where id_pembeli = 4;
+Query OK, 1 row affected (0.008 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> select*from pembeli
+    -> ;
++------------+--------------+----------+------------+
+| id_pembeli | nama_pembeli | alamat   | no_hp      |
++------------+--------------+----------+------------+
+|          1 | Dimas        | Bojong   | 0388173891 |
+|          2 | Syahrul      | Bogor    | 0388173892 |
+|          3 | Adli         | Citayam  | 0388173893 |
+|          4 | Bama         | Citayam  | 0388173894 |
+|          5 | Gibran       | Sukahati | 0388173895 |
+|          6 | Zaki         | Sukahati | 0388173896 |
+|          7 | Revan        | Citayam  | 0388173897 |
++------------+--------------+----------+------------+
+7 rows in set (0.001 sec)
+
+MariaDB [showroom_motor]> SELECT AVG(nilai) FROM siswa;
+ERROR 1146 (42S02): Table 'showroom_motor.siswa' doesn't exist
+MariaDB [showroom_motor]> SELECT AVG(harga) FROM barang;
++-----------------+
+| AVG(harga)      |
++-----------------+
+| 25857142.857143 |
++-----------------+
+1 row in set (0.000 sec)
+
+MariaDB [showroom_motor]> SELECT MIN(harga) FROM barang;
++-------------+
+| MIN(harga)  |
++-------------+
+| 16000000.00 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [showroom_motor]> SELECT MAX(harga) FROM barang;
++-------------+
+| MAX(harga)  |
++-------------+
+| 37000000.00 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [showroom_motor]> SELECT nama_barang,harga from barang where harga=(select min(harga) from barang);
++-------------------+-------------+
+| nama_barang       | harga       |
++-------------------+-------------+
+| Honda Supra X 125 | 16000000.00 |
++-------------------+-------------+
+1 row in set (0.001 sec)
+
+MariaDB [showroom_motor]> SELECT nama_barang,harga from barang where harga=(select max(harga) from barang);
++---------------+-------------+
+| nama_barang   | harga       |
++---------------+-------------+
+| Honda ADV 160 | 37000000.00 |
++---------------+-------------+
+1 row in set (0.000 sec)
+MariaDB [showroom_motor]> Select * FROM transaksi WHERE nama_barang = 'Honda Beat' or jumlah_beli = '1';
++--------------+-----------------+-------------------+-------------+-------------+
+| id_transaksi | nama_barang     | tanggal_transaksi | jumlah_beli | total_bayar |
++--------------+-----------------+-------------------+-------------+-------------+
+|            1 | Honda Beat      | 2026-02-01        |           1 | 19000000.00 |
+|            2 | Honda Vario 160 | 2026-02-02        |           1 | 29000000.00 |
+|            4 | Honda PCX 160   | 2026-02-04        |           1 | 33000000.00 |
+|            5 | Honda ADV 160   | 2026-02-05        |           1 | 37000000.00 |
+|            7 | Honda Verza     | 2026-02-07        |           1 | 24000000.00 |
+|            8 | Honda Beat      | 2026-02-08        |           2 | 38000000.00 |
+|            9 | Honda Scoopy    | 2026-02-09        |           1 | 23000000.00 |
++--------------+-----------------+-------------------+-------------+-------------+
+7 rows in set (0.000 sec)
+
+MariaDB [showroom_motor]> Select * FROM transaksi WHERE nama_barang = 'Honda Beat' or jumlah_beli = 1 limit 5;
++--------------+-----------------+-------------------+-------------+-------------+
+| id_transaksi | nama_barang     | tanggal_transaksi | jumlah_beli | total_bayar |
++--------------+-----------------+-------------------+-------------+-------------+
+|            1 | Honda Beat      | 2026-02-01        |           1 | 19000000.00 |
+|            2 | Honda Vario 160 | 2026-02-02        |           1 | 29000000.00 |
+|            4 | Honda PCX 160   | 2026-02-04        |           1 | 33000000.00 |
+|            5 | Honda ADV 160   | 2026-02-05        |           1 | 37000000.00 |
+|            7 | Honda Verza     | 2026-02-07        |           1 | 24000000.00 |
++--------------+-----------------+-------------------+-------------+-------------+
+5 rows in set (0.000 sec)
+MariaDB [showroom_motor]> ALTER TABLE transaksi
+    -> ADD kode_transaksi VARCHAR(20)
+    -> AFTER id_transaksi;
+Query OK, 0 rows affected (0.010 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [showroom_motor]> select*from transaksi;
++--------------+----------------+-------------------+-------------------+-------------+-------------+
+| id_transaksi | kode_transaksi | nama_barang       | tanggal_transaksi | jumlah_beli | total_bayar |
++--------------+----------------+-------------------+-------------------+-------------+-------------+
+|            1 | NULL           | Honda Beat        | 2026-02-01        |           1 | 19000000.00 |
+|            2 | NULL           | Honda Vario 160   | 2026-02-02        |           1 | 29000000.00 |
+|            3 | NULL           | Honda Scoopy      | 2026-02-03        |           2 | 46000000.00 |
+|            4 | NULL           | Honda PCX 160     | 2026-02-04        |           1 | 33000000.00 |
+|            5 | NULL           | Honda ADV 160     | 2026-02-05        |           1 | 37000000.00 |
+|            6 | NULL           | Honda Supra X 125 | 2026-02-06        |           3 | 48000000.00 |
+|            7 | NULL           | Honda Verza       | 2026-02-07        |           1 | 24000000.00 |
+|            8 | NULL           | Honda Beat        | 2026-02-08        |           2 | 38000000.00 |
+|            9 | NULL           | Honda Scoopy      | 2026-02-09        |           1 | 23000000.00 |
+|           10 | NULL           | Honda PCX 160     | 2026-02-10        |           2 | 66000000.00 |
++--------------+----------------+-------------------+-------------------+-------------+-------------+
+10 rows in set (0.000 sec)
+MariaDB [showroom_motor]> ALTER TABLE transaksi CHANGE kode_transaksi nama_pembeli VARCHAR(100);
+Query OK, 0 rows affected (0.009 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [showroom_motor]> select * from transaksi;
++--------------+--------------+-------------------+-------------------+-------------+-------------+
+| id_transaksi | nama_pembeli | nama_barang       | tanggal_transaksi | jumlah_beli | total_bayar |
++--------------+--------------+-------------------+-------------------+-------------+-------------+
+|            1 | NULL         | Honda Beat        | 2026-02-01        |           1 | 19000000.00 |
+|            2 | NULL         | Honda Vario 160   | 2026-02-02        |           1 | 29000000.00 |
+|            3 | NULL         | Honda Scoopy      | 2026-02-03        |           2 | 46000000.00 |
+|            4 | NULL         | Honda PCX 160     | 2026-02-04        |           1 | 33000000.00 |
+|            5 | NULL         | Honda ADV 160     | 2026-02-05        |           1 | 37000000.00 |
+|            6 | NULL         | Honda Supra X 125 | 2026-02-06        |           3 | 48000000.00 |
+|            7 | NULL         | Honda Verza       | 2026-02-07        |           1 | 24000000.00 |
+|            8 | NULL         | Honda Beat        | 2026-02-08        |           2 | 38000000.00 |
+|            9 | NULL         | Honda Scoopy      | 2026-02-09        |           1 | 23000000.00 |
+|           10 | NULL         | Honda PCX 160     | 2026-02-10        |           2 | 66000000.00 |
++--------------+--------------+-------------------+-------------------+-------------+-------------+
+10 rows in set (0.000 sec)
+
+MariaDB [showroom_motor]> UPDATE transaksi SET nama_pembeli = 'Dimas' WHERE id_transaksi = 1;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> UPDATE transaksi SET nama_pembeli = 'Syahrul' WHERE id_transaksi = 2;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> UPDATE transaksi SET nama_pembeli = 'Adli' WHERE id_transaksi = 3;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> UPDATE transaksi SET nama_pembeli = 'Bama' WHERE id_transaksi = 4;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> UPDATE transaksi SET nama_pembeli = 'Gibran' WHERE id_transaksi = 5;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> UPDATE transaksi SET nama_pembeli = 'Zaki' WHERE id_transaksi = 6;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> UPDATE transaksi SET nama_pembeli = 'Revan' WHERE id_transaksi = 7;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> UPDATE transaksi SET nama_pembeli = 'Dimas' WHERE id_transaksi = 8;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> UPDATE transaksi SET nama_pembeli = 'Adli' WHERE id_transaksi = 9;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> UPDATE transaksi SET nama_pembeli = 'Bama' WHERE id_transaksi = 10;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [showroom_motor]> select * from transaksi;
++--------------+--------------+-------------------+-------------------+-------------+-------------+
+| id_transaksi | nama_pembeli | nama_barang       | tanggal_transaksi | jumlah_beli | total_bayar |
++--------------+--------------+-------------------+-------------------+-------------+-------------+
+|            1 | Dimas        | Honda Beat        | 2026-02-01        |           1 | 19000000.00 |
+|            2 | Syahrul      | Honda Vario 160   | 2026-02-02        |           1 | 29000000.00 |
+|            3 | Adli         | Honda Scoopy      | 2026-02-03        |           2 | 46000000.00 |
+|            4 | Bama         | Honda PCX 160     | 2026-02-04        |           1 | 33000000.00 |
+|            5 | Gibran       | Honda ADV 160     | 2026-02-05        |           1 | 37000000.00 |
+|            6 | Zaki         | Honda Supra X 125 | 2026-02-06        |           3 | 48000000.00 |
+|            7 | Revan        | Honda Verza       | 2026-02-07        |           1 | 24000000.00 |
+|            8 | Dimas        | Honda Beat        | 2026-02-08        |           2 | 38000000.00 |
+|            9 | Adli         | Honda Scoopy      | 2026-02-09        |           1 | 23000000.00 |
+|           10 | Bama         | Honda PCX 160     | 2026-02-10        |           2 | 66000000.00 |
++--------------+--------------+-------------------+-------------------+-------------+-------------+
+10 rows in set (0.000 sec)
+
+MariaDB [showroom_motor]> select * from barang;
++-----------+-------------------+-------------+------+
+| id_barang | nama_barang       | harga       | stok |
++-----------+-------------------+-------------+------+
+|         1 | Honda Beat        | 19000000.00 |   15 |
+|         2 | Honda Vario 160   | 29000000.00 |   10 |
+|         3 | Honda Scoopy      | 23000000.00 |   15 |
+|         4 | Honda PCX 160     | 33000000.00 |   10 |
+|         5 | Honda ADV 160     | 37000000.00 |    5 |
+|         6 | Honda Supra X 125 | 16000000.00 |   15 |
+|         7 | Honda Verza       | 24000000.00 |    5 |
++-----------+-------------------+-------------+------+
+7 rows in set (0.000 sec)
+
+MariaDB [showroom_motor]> select * from pembeli;
++------------+--------------+----------+------------+
+| id_pembeli | nama_pembeli | alamat   | no_hp      |
++------------+--------------+----------+------------+
+|          1 | Dimas        | Bojong   | 0388173891 |
+|          2 | Syahrul      | Bogor    | 0388173892 |
+|          3 | Adli         | Citayam  | 0388173893 |
+|          4 | Bama         | Citayam  | 0388173894 |
+|          5 | Gibran       | Sukahati | 0388173895 |
+|          6 | Zaki         | Sukahati | 0388173896 |
+|          7 | Revan        | Citayam  | 0388173897 |
++------------+--------------+----------+------------+
+7 rows in set (0.000 sec)
+
+MariaDB [showroom_motor]> SELECT
+    ->     t.id_transaksi,
+    ->     t.nama_pembeli,
+    ->     p.alamat,
+    ->     t.nama_barang,
+    ->     b.harga,
+    ->     t.jumlah_beli,
+    ->     t.total_bayar
+    -> FROM transaksi t
+    -> INNER JOIN pembeli p
+    ->     ON t.nama_pembeli = p.nama_pembeli
+    -> INNER JOIN barang b
+    ->     ON t.nama_barang = b.nama_barang;
++--------------+--------------+----------+-------------------+-------------+-------------+-------------+
+| id_transaksi | nama_pembeli | alamat   | nama_barang       | harga       | jumlah_beli | total_bayar |
++--------------+--------------+----------+-------------------+-------------+-------------+-------------+
+|            1 | Dimas        | Bojong   | Honda Beat        | 19000000.00 |           1 | 19000000.00 |
+|            2 | Syahrul      | Bogor    | Honda Vario 160   | 29000000.00 |           1 | 29000000.00 |
+|            3 | Adli         | Citayam  | Honda Scoopy      | 23000000.00 |           2 | 46000000.00 |
+|            4 | Bama         | Citayam  | Honda PCX 160     | 33000000.00 |           1 | 33000000.00 |
+|            5 | Gibran       | Sukahati | Honda ADV 160     | 37000000.00 |           1 | 37000000.00 |
+|            6 | Zaki         | Sukahati | Honda Supra X 125 | 16000000.00 |           3 | 48000000.00 |
+|            7 | Revan        | Citayam  | Honda Verza       | 24000000.00 |           1 | 24000000.00 |
+|            8 | Dimas        | Bojong   | Honda Beat        | 19000000.00 |           2 | 38000000.00 |
+|            9 | Adli         | Citayam  | Honda Scoopy      | 23000000.00 |           1 | 23000000.00 |
+|           10 | Bama         | Citayam  | Honda PCX 160     | 33000000.00 |           2 | 66000000.00 |
++--------------+--------------+----------+-------------------+-------------+-------------+-------------+
+10 rows in set (0.007 sec)
+
+MariaDB [showroom_motor]> SELECT
+    ->     b.nama_barang,
+    ->     b.harga,
+    ->     t.jumlah_beli
+    -> FROM barang b
+    -> LEFT JOIN transaksi t
+    ->     ON b.nama_barang = t.nama_barang;
++-------------------+-------------+-------------+
+| nama_barang       | harga       | jumlah_beli |
++-------------------+-------------+-------------+
+| Honda Beat        | 19000000.00 |           1 |
+| Honda Vario 160   | 29000000.00 |           1 |
+| Honda Scoopy      | 23000000.00 |           2 |
+| Honda PCX 160     | 33000000.00 |           1 |
+| Honda ADV 160     | 37000000.00 |           1 |
+| Honda Supra X 125 | 16000000.00 |           3 |
+| Honda Verza       | 24000000.00 |           1 |
+| Honda Beat        | 19000000.00 |           2 |
+| Honda Scoopy      | 23000000.00 |           1 |
+| Honda PCX 160     | 33000000.00 |           2 |
++-------------------+-------------+-------------+
+10 rows in set (0.000 sec)
+
+MariaDB [showroom_motor]> SELECT
+    ->     b.nama_barang,
+    ->     t.tanggal_transaksi
+    -> FROM barang b
+    -> LEFT JOIN transaksi t
+    ->     ON b.nama_barang = t.nama_barang
+    ->
+    -> UNION
+    ->
+    -> SELECT
+    ->     b.nama_barang,
+    ->     t.tanggal_transaksi
+    -> FROM barang b
+    -> RIGHT JOIN transaksi t
+    ->     ON b.nama_barang = t.nama_barang;
++-------------------+-------------------+
+| nama_barang       | tanggal_transaksi |
++-------------------+-------------------+
+| Honda Beat        | 2026-02-01        |
+| Honda Vario 160   | 2026-02-02        |
+| Honda Scoopy      | 2026-02-03        |
+| Honda PCX 160     | 2026-02-04        |
+| Honda ADV 160     | 2026-02-05        |
+| Honda Supra X 125 | 2026-02-06        |
+| Honda Verza       | 2026-02-07        |
+| Honda Beat        | 2026-02-08        |
+| Honda Scoopy      | 2026-02-09        |
+| Honda PCX 160     | 2026-02-10        |
++-------------------+-------------------+
+10 rows in set (0.007 sec)
+
+MariaDB [showroom_motor]> CREATE VIEW view_detail_transaksi AS
+    -> SELECT
+    ->     t.id_transaksi,
+    ->     p.nama_pembeli,
+    ->     p.alamat,
+    ->     p.no_hp,
+    ->     b.nama_barang,
+    ->     b.harga,
+    ->     t.jumlah_beli,
+    ->     t.total_bayar,
+    ->     t.tanggal_transaksi
+    -> FROM transaksi t
+    -> JOIN pembeli p ON t.nama_pembeli = p.nama_pembeli
+    -> JOIN barang b ON t.nama_barang = b.nama_barang;
+Query OK, 0 rows affected (0.005 sec)
