@@ -1,3 +1,5 @@
+https://www.linkedin.com/in/revan-oknanda-8950413a6/
+
 # 🏍️ Database Showroom Motor
 
 Project database sederhana menggunakan **MySQL / MariaDB** melalui **XAMPP (Windows)**.  
